@@ -58,7 +58,7 @@ export interface GroupCallProps {
 }
 
 export default (props: GroupCallProps): JSX.Element => {
-  const [selectedPane, setSelectedPane] = useState(CommandPanelTypes.People);
+  const [selectedPane, setSelectedPane] = useState(CommandPanelTypes.None);
   const activeScreenShare = props.screenShareStreams && props.screenShareStreams.length === 1;
 
   const { callAgent, call, groupId, joinGroup, attempts, setAttempts, endCallHandler } = props;

@@ -73,8 +73,9 @@ export default (props: RemoteStreamMediaProps): JSX.Element => {
   return (
     <div className={mediaContainer}>
       <div style={{display: activeStreamBeingRendered ? 'block' : 'none' }} className={mediaContainer} id={streamId} />
-        <Image {...imageProps} style={{ display: activeStreamBeingRendered ? 'none' : 'block'}} />
-        <Label className={videoHint}>{label}</Label>
+        <Image {...imageProps} style={{ display: activeStreamBeingRendered ? 'none' : 'block'}} >
+        <label className={videoHint} >{label} </label>
+        </Image>
     </div>
   );
 };
