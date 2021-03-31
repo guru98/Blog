@@ -1,21 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { App } from './App';
-import { mergeStyles } from '@fluentui/react';
-import reportWebVitals from './reportWebVitals';
+import ReactDOM from 'react-dom'; 
+import App  from './App';
+import './index.css';
+import {Provider} from '@fluentui/react-northstar';
+import { svgIconStyles } from '@fluentui/react-northstar/dist/es/themes/teams/components/SvgIcon/svgIconStyles';
+import { svgIconVariables } from '@fluentui/react-northstar/dist/es/themes/teams/components/SvgIcon/svgIconVariables';
+import * as siteVariables from '@fluentui/react-northstar/dist/es/themes/teams/siteVariables';
 
-// Inject some global styles
-mergeStyles({
-  ':global(body,html,#root)': {
-    margin: 0,
-    padding: 0,
-    height: '100vh',
+
+
+const iconTheme = {
+  componentStyles: {
+    SvgIcon: svgIconStyles
   },
-});
+  componentVariables: {
+    SvgIcon: svgIconVariables
+  },
+  siteVariables
+};
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDOM.render(
+  <Provider theme={iconTheme} className="wrapper">
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
