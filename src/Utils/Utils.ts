@@ -11,7 +11,7 @@ export const utils = {
     return window.location.origin;
   },
   getTokenFromFunction: async ():Promise<CommunicationUserToken> => {
-    const response = await fetch('http://localhost:7071/api/CommTokenGen');
+    const response = await fetch('https://passycommtokengentest.azurewebsites.net/api/CommTokenGen?code=2JsNTWy1vrbDOhIOqHXnuo1WhBJUJ0mNl4fLDxkFtcLK/V5HV4qFMw==');
     if(response.ok){
       return response.json();
     }
@@ -44,16 +44,15 @@ export const utils = {
   getId: (identifier: CommunicationIdentifierKind): string => {
     switch(identifier.kind) {
       case 'communicationUser':
-        return identifier.communicationUserId;
-      case 'callingApplication':
-        return identifier.callingApplicationId;
+        return identifier.communicationUserId;      
       case 'phoneNumber':
         return identifier.phoneNumber;
       case 'microsoftTeamsUser':
         return identifier.microsoftTeamsUserId;
       case 'unknown':
-        return identifier.id;
+        return identifier.id;    
     }
+    
   },
   getStreamId: (userId: string, stream: RemoteVideoStream): string => {
     return `${userId}-${stream.id}-${stream.mediaStreamType}`;

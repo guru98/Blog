@@ -2,7 +2,7 @@ import {
   AudioDeviceInfo,
   Call,
   CallClientOptions,
-  CommunicationError,
+  CommunicationServicesError,
   GroupCallLocator,
   JoinCallOptions,
   DeviceManager,
@@ -15,7 +15,6 @@ import {
 } from '@azure/communication-calling';
 import {
   AzureCommunicationTokenCredential,
-  CallingApplicationKind,
   CommunicationUserKind
 } from '@azure/communication-common';
 import { CommunicationUserToken } from '@azure/communication-identity';
@@ -326,7 +325,7 @@ export const initCallClient = (unsupportedStateHandler: () => void) => {
 
 // what does the forEveryone parameter really mean?
 export const endCall = async (call: Call, options: HangUpOptions): Promise<void> => {
-  await call.hangUp(options).catch((e: CommunicationError) => console.error(e));
+  await call.hangUp(options).catch((e: CommunicationServicesError) => console.error(e));
 };
 
 export const joinGroup = async (callAgent: CallAgent, context: GroupCallLocator, callOptions: JoinCallOptions): Promise<void> => {
@@ -338,13 +337,13 @@ export const joinGroup = async (callAgent: CallAgent, context: GroupCallLocator,
   }
 };
 
-export const addParticipant = async (call: Call, user: CommunicationUserKind | CallingApplicationKind): Promise<void> => {
+export const addParticipant = async (call: Call, user: CommunicationUserKind): Promise<void> => {
   await call.addParticipant(user);
 };
 
 export const removeParticipant = async (
   call: Call,
-  user: CommunicationUserKind | CallingApplicationKind
+  user: CommunicationUserKind
 ): Promise<void> => {
-  await call.removeParticipant(user).catch((e: CommunicationError) => console.error(e));
+  await call.removeParticipant(user).catch((e: CommunicationServicesError) => console.error(e));
 };

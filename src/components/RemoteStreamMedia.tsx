@@ -1,8 +1,8 @@
 // © Microsoft Corporation. All rights reserved.
 
-import React, { useEffect, useState } from 'react';
-import { Label } from '@fluentui/react';
-import { RemoteVideoStream, Renderer, RendererView } from '@azure/communication-calling';
+import { useEffect, useState } from 'react';
+//import { Label } from '@fluentui/react';
+import { RemoteVideoStream, VideoStreamRenderer, VideoStreamRendererView } from '@azure/communication-calling';
 import { videoHint, mediaContainer } from './styles/StreamMedia.styles';
 import { utils } from 'Utils/Utils';
 import staticMediaSVG from '../assets/staticmedia.svg';
@@ -14,7 +14,7 @@ export interface RemoteStreamMediaProps {
 }
 
 export default (props: RemoteStreamMediaProps): JSX.Element => {
-  let rendererView: RendererView;
+  let rendererView: VideoStreamRendererView;
 
   const streamId = props.stream ? utils.getStreamId(props.label, props.stream) : `${props.label} - no stream`;
 
@@ -43,7 +43,7 @@ export default (props: RemoteStreamMediaProps): JSX.Element => {
 
       // set the flag that a stream is being rendered
       setActiveStreamBeingRendered(true);
-      const renderer: Renderer = new Renderer(props.stream);
+      const renderer: VideoStreamRenderer = new VideoStreamRenderer(props.stream);
       // this can block a really long time if we fail to be subscribed to the call and it has to retry
       const rendererView = await renderer.createView({ scalingMode: 'Crop' });
       if (container && container.childElementCount === 0) {
